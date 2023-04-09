@@ -7,8 +7,9 @@ import ssl
 import logging
 
 load_dotenv()
-logging.basicConfig(filename='error.log',
-                    encoding='utf-8', level=logging.DEBUG)
+FORMAT = '%(levelname)s:%(asctime)s - %(message)s'
+logging.basicConfig(filename='process.log',
+                    encoding='utf-8', level=logging.INFO, format=FORMAT)
 
 
 product_name = 'Kensington Slimblade Pro'
@@ -42,8 +43,9 @@ if "Where to Buy" in driver.page_source:
             smtp_email,
             message
         )
-        print("Product is available.")
+        logging.info("Product is available.")
     except Exception:
-        logging.exception("Email Failed")
-
+        logging.exception("Item in stock, email failed.")
+else:
+    logging.info("Item not in stock, no email sent.")
 driver.close()
