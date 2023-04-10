@@ -8,7 +8,7 @@ import logging
 
 load_dotenv()
 FORMAT = '%(levelname)s:%(asctime)s - %(message)s'
-logging.basicConfig(filename='process.log',
+logging.basicConfig(filename='/home/artfvl/Documents/code/kensington-stock-checker/process.log',
                     encoding='utf-8', level=logging.INFO, format=FORMAT)
 
 
@@ -18,7 +18,7 @@ product_url = 'https://www.kensington.com/en-gb/p/products/control/trackballs/sl
 
 options = Options()
 options.add_argument("-headless")
-driver = webdriver.Firefox(options=options)
+driver = webdriver.Firefox(options=options, service_log_path=os.devnull)
 driver.get(product_url)
 
 port = 587
